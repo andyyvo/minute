@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import AudioRecord from './src/screens/testaudio';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <AudioRecord></AudioRecord>
+      
       <StatusBar style="auto" />
     </View>
   );
