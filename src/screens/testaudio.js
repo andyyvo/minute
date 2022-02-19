@@ -2,9 +2,15 @@ import * as React from 'react';
 import { Text, View, Stylesheet, Button } from 'react-native';
 import { Audio } from 'expo-av';
 
+/**
+ * from the expo documentation: https://docs.expo.dev/versions/latest/sdk/audio/#audiorecording
+ */
 export default function AudioRecord() {
     const [recording, setRecording] = React.useState();
 
+    /**
+     * starting up audio recording, requesting permissions, etc.
+     */
     async function startRecording() {
         try {
             console.log('Requesting permissions!');
@@ -25,6 +31,9 @@ export default function AudioRecord() {
         }
     }
 
+    /**
+     * stop recording and save to local uri
+     */
     async function stopRecording() {
         console.log('Stopping recording!');
         setRecording(undefined);
