@@ -15,7 +15,7 @@ export default function App() {
       if (permission.status === "granted") {
         await Audio.setAudioModeAsync({
           allowsRecordingIOS: true,
-          playsInSilentModeIOS: true
+          playsInSilentModeIOS: true,
         });
         
         const { recording } = await Audio.Recording.createAsync(
@@ -34,9 +34,12 @@ export default function App() {
   async function stopRecording() {
     setRecording(undefined);
     await recording.stopAndUnloadAsync();
+    
+    Audio.setAudioModeAsync({ allowsRecordingIOS: false })
 
     let updatedRecordings = [...recordings];
     const { sound, status } = await recording.createNewLoadedSoundAsync();
+    sound.volume = 1.0;
     updatedRecordings.push({
       sound: sound,
       duration: getDurationFormatted(status.durationMillis),
