@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { Audio } from 'expo-av';
 
-export default function App() {
+export default function RecordScreen() {
   const [recording, setRecording] = React.useState();
   const [recordings, setRecordings] = React.useState([]);
   const [message, setMessage] = React.useState("");
