@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'; 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import TabBarItem from "./src/TabBarItem";
+import TabBarItem from "./src/components/TabBarItem";
 
 // SCREENS
 import Record from './src/screens/RecordScreen';
