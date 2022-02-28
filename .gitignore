@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+testaudio2.js
 
 # macOS
 .DS_Store
