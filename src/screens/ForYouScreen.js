@@ -4,9 +4,14 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { Audio } from 'expo-av';
 
 export default function RecordScreen() {
+  // recording: current recording
   const [recording, setRecording] = React.useState();
+  // recordings: array of all recordings
   const [recordings, setRecordings] = React.useState([]);
+  // message: any error messages
   const [message, setMessage] = React.useState("");
+  // transcription: result of STT call
+  const [transcription, setTranscription] = React.useState("");
 
   async function startRecording() {
     try {
@@ -70,6 +75,7 @@ export default function RecordScreen() {
 
   return (
     <View style={styles.container}>
+      {/* <Text>{transcription}</Text> */}
       <Text>{message}</Text>
       <Button
         title={recording ? 'Stop Recording' : 'Start Recording'}
