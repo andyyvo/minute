@@ -4,9 +4,23 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { Audio } from 'expo-av';
 
 export default function ForYouScreen() {
+  // STATES
+  // recording: current recording
   const [recording, setRecording] = React.useState();
+  // recordings: array of all recordings
   const [recordings, setRecordings] = React.useState([]);
+  // message: any error messages
   const [message, setMessage] = React.useState("");
+  // transcription: result of STT call
+  const [transcription, setTranscription] = React.useState("");
+  // isFetching: true while making Google STT API call
+  // const [isFetching, setIsFetching] = React.useState(false);
+
+  // GOOGLE SPEECH TO TEXT
+  // Imports the Google Cloud client library
+  const speech = require('@google-cloud/speech');
+  // Creates a client
+  const client = new speech.SpeechClient();
 
   async function startRecording() {
     try {
@@ -40,12 +54,17 @@ export default function ForYouScreen() {
     let updatedRecordings = [...recordings];
     const { sound, status } = await recording.createNewLoadedSoundAsync();
     sound.volume = 1.0;
+    // get the transcription of audio file
+    await getTranscription(recording.getURI());
+
+    // push the new recording to array, including transcription from STT
     updatedRecordings.push({
       sound: sound,
       duration: getDurationFormatted(status.durationMillis),
-      file: recording.getURI()
+      file: recording.getURI(),
+      // transcription: transcription
     });
-
+    
     setRecordings(updatedRecordings);
   }
 
@@ -57,7 +76,7 @@ export default function ForYouScreen() {
     return `${minutesDisplay}:${secondsDisplay}`;
   }
 
-  function getRecordingLines() {
+  function getAllRecordings() {
     return recordings.map((recordingLine, index) => {
       return (
         <View key={index} style={styles.row}>
@@ -68,13 +87,62 @@ export default function ForYouScreen() {
     });
   }
 
+//   async function getTranscription(recUri) {
+//     setIsFetching(true);
+//     try {
+//       const uri = await FileSystem.getInfoAsync(recUri);
+//       // console.log(`FILE INFO: ${JSON.stringify(info)}`);
+//       // const uri = info.uri;
+//       const formData = new FormData();
+//       formData.append('file', {
+//         uri,
+//         type: 'audio/x-wav',
+//         name: 'speech2text'
+//       });
+//       const response = await fetch(config.CLOUD_FUNCTION_URL, {
+//         method: 'POST',
+//         body: formData
+//       });
+//       const data = await response.json();
+//       setTranscription(data.transcript);
+//     } catch(error) {
+//       console.log('Error with Google API call', error);
+//     }
+//     setIsFetching(false);
+// }
+
+async function getTranscription(recUri) {
+    const audio = {
+      uri: recUri,
+    };
+    const config = {
+      encoding: 'LINEAR16',
+      sampleRateHertz: 16000,
+      languageCode: 'en-US',
+    };
+
+    const request = {
+      config: config,
+      audio: audio,
+    };
+
+    // Detects speech in the audio file
+    const [response] = await client.recognize(request);
+    const transcription = response.results
+      .map(result => result.alternatives[0].transcript)
+      .join('\n');
+    console.log('Transcription: ', transcription);
+    setTranscription(transcription);
+ }
+
   return (
     <View style={styles.container}>
-      <Text>{message}</Text>
+      <Text>{transcription ? transcription : ""}</Text>
       <Button
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording} />
-      {getRecordingLines()}
+      <Text>{message}</Text>
+      {getAllRecordings()}
       <StatusBar style="auto" />
     </View>
   );

@@ -3,8 +3,8 @@ import { Text, View, Image } from "react-native";
 
 export default function TabBarIcon({ focused, text }) {
   const textColor = focused ? "#1D3953" : "#95B8DA";
-  const icon = (text == "For You" ? (focused ? require('./microphonebold.png') : require('./microphone.png'))
-  : (focused ? require('./bookbold.png') : require('./book.png')));
+  const icon = (text == "For You" ? (focused ? require('../../images/microphonebold.png') : require('../../images/microphone.png'))
+  : (focused ? require('../../images/bookbold.png') : require('../../images/book.png')));
 
   return (
   <View style={alignItems="center"}>
