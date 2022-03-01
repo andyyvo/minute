@@ -11,20 +11,24 @@ const fetch = require("node-fetch"); // fetch api calls
 const fs = require("fs"); // file stream
 const url = "https://api.assemblyai.com/v2/upload"; // assemblyai api endpoint
 
-// save audio file as data
-fs.readFile(audioFile, (err, data) => {
-    if (err) {
-        return console.log(err);
-    }
-})
+export default function uploadAudio(audioFile) {
 
-// Fetch API POST request
-const params = {
-    headers: {
-      "authorization": process.env.ASSEMBLYAI_API_KEY,
-      "Transfer-Encoding" : "chunked"
-    },
-    body: data,
-    method: 'POST'
-};
+    // save audio file as data
+    fs.readFile(audioFile, (err, data) => {
+        if (err) {
+            return console.log(err);
+        }
+    })
+    
+    // Fetch API POST request
+    const params = {
+        headers: {
+          "authorization": process.env.ASSEMBLYAI_API_KEY,
+          "Transfer-Encoding" : "chunked"
+        },
+        body: data,
+        method: 'POST'
+    };
+}
+
 
