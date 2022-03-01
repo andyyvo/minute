@@ -1,7 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { Audio } from 'expo-av';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
+import { Audio } from "expo-av";
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "FIREBASE_API_KEY",
+  authDomain: "minute-802a0.firebaseapp.com",
+  databaseURL: "https://minute-802a0-default-rtdb.firebaseio.com/",
+  projectId: "minute-802a0",
+  storageBucket: "minute-802a0.appspot.com",
+  messagingSenderId: "1026593178778",
+  appId: "1:1026593178778:web:e926c9975ac726da388b23",
+  measurementId: "G-18ZXNJ4Y6L",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+// Get a reference to the database service
+const database = getDatabase(app);
 
 export default function RecordScreen() {
   // recording: current recording
@@ -22,7 +46,7 @@ export default function RecordScreen() {
           allowsRecordingIOS: true,
           playsInSilentModeIOS: true,
         });
-        
+
         const { recording } = await Audio.Recording.createAsync(
           Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
         );
@@ -32,15 +56,15 @@ export default function RecordScreen() {
         setMessage("Please grant permission to app to access microphone");
       }
     } catch (err) {
-      console.error('Failed to start recording', err);
+      console.error("Failed to start recording", err);
     }
   }
 
   async function stopRecording() {
     setRecording(undefined);
     await recording.stopAndUnloadAsync();
-    
-    Audio.setAudioModeAsync({ allowsRecordingIOS: false })
+
+    Audio.setAudioModeAsync({ allowsRecordingIOS: false });
 
     let updatedRecordings = [...recordings];
     const { sound, status } = await recording.createNewLoadedSoundAsync();
@@ -48,7 +72,7 @@ export default function RecordScreen() {
     updatedRecordings.push({
       sound: sound,
       duration: getDurationFormatted(status.durationMillis),
-      file: recording.getURI()
+      file: recording.getURI(),
     });
 
     setRecordings(updatedRecordings);
@@ -66,8 +90,14 @@ export default function RecordScreen() {
     return recordings.map((recordingLine, index) => {
       return (
         <View key={index} style={styles.row}>
-          <Text style={styles.fill}>Recording {index + 1} - {recordingLine.duration}</Text>
-          <Button style={styles.button} onPress={() => recordingLine.sound.replayAsync()} title="Play"></Button>
+          <Text style={styles.fill}>
+            Recording {index + 1} - {recordingLine.duration}
+          </Text>
+          <Button
+            style={styles.button}
+            onPress={() => recordingLine.sound.replayAsync()}
+            title="Play"
+          ></Button>
         </View>
       );
     });
@@ -78,8 +108,9 @@ export default function RecordScreen() {
       {/* <Text>{transcription}</Text> */}
       <Text>{message}</Text>
       <Button
-        title={recording ? 'Stop Recording' : 'Start Recording'}
-        onPress={recording ? stopRecording : startRecording} />
+        title={recording ? "Stop Recording" : "Start Recording"}
+        onPress={recording ? stopRecording : startRecording}
+      />
       {getRecordingLines()}
       <StatusBar style="auto" />
     </View>
@@ -89,20 +120,20 @@ export default function RecordScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   fill: {
     flex: 1,
-    margin: 16
+    margin: 16,
   },
   button: {
-    margin: 16
-  }
+    margin: 16,
+  },
 });

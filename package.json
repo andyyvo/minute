@@ -21,6 +21,7 @@
     "expo-status-bar": "~1.2.0",
     "fs": "^0.0.1-security",
     "node-fetch": "^3.2.0",
+    "firebase": "^9.6.7",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",

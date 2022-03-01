@@ -10,6 +10,7 @@ npm-debug.*
 *.orig.*
 web-build/
 testaudio2.js
+.env
 
 # macOS
 .DS_Store
