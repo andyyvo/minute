@@ -3,27 +3,13 @@ import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { Audio } from "expo-av";
 
-// Import the functions you need from the SDKs you need
+// FIREBASE
+import { firebase } from "../firebase/config";
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "FIREBASE_API_KEY",
-  authDomain: "minute-802a0.firebaseapp.com",
-  databaseURL: "https://minute-802a0-default-rtdb.firebaseio.com/",
-  projectId: "minute-802a0",
-  storageBucket: "minute-802a0.appspot.com",
-  messagingSenderId: "1026593178778",
-  appId: "1:1026593178778:web:e926c9975ac726da388b23",
-  measurementId: "G-18ZXNJ4Y6L",
-};
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebase);
 // Get a reference to the database service
 const database = getDatabase(app);
 

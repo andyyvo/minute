@@ -33,3 +33,4 @@
 3. https://github.com/apiko-dev/Multimedia-Notes <br/>
 4. https://www.assemblyai.com/pricing <br/>
 5. https://github.com/chelseafarley/expo-av-demo/blob/master/App.js. 
+6. https://rnfirebase.io/
