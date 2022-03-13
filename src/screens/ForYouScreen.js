@@ -78,10 +78,12 @@ export default function RecordScreen() {
     });
 
     setRecordings(updatedRecordings);
+
+    
     const recordingUri = recording.getURI();
     console.log("URI: ", recordingUri);
-    // uploadAudio(soundFile);
-    uploadUrl("https://bit.ly/3yxKEIY");
+    uploadAudio(soundFile);
+    // uploadUrl("https://bit.ly/3yxKEIY");
   }
 
   function getDurationFormatted(millis) {

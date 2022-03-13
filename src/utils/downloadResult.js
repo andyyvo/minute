@@ -7,7 +7,7 @@ import axios from 'axios';
  * node ./src/utils/downloadResult.js
  */
 
-// export default function downloadResult(audioID) {
+export default function downloadResult(audioID) {
 
     const audioID = "og3aszo649-a10f-4dbd-aa96-9148bbdf64d9"
     
@@ -27,4 +27,4 @@ import axios from 'axios';
         })
         .catch((err) => console.error(err));
 
-// }
+}

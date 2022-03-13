@@ -34,7 +34,7 @@ export default function uploadAudio(audioFile) {
         // Fetch API POST request
         const params = {
             headers: {
-                "authorization": process.env.ASSEMBLYAI_API_KEY,
+                authorization: process.env.ASSEMBLYAI_API_KEY,
                 "Transfer-Encoding" : "chunked"
             },
             body: data,

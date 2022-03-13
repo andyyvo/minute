@@ -12,15 +12,15 @@ export default function uploadUrl(audioUrl) {
 
     // const assembly = axios.create({
     //     baseURL: "https://api.assemblyai.com/v2",
-        // headers: {
-        //     authorization: process.env.ASSEMBLYAI_API_KEY,
-        //     "content-type": "application/json",
-        // },
+    //     headers: {
+    //         authorization: process.env.ASSEMBLYAI_API_KEY,
+    //         "content-type": "application/json",
+    //     },
     // });
     // assembly
     //     .post("/transcript", {
-    //         // audio_url: "https://bit.ly/3yxKEIY",
-    //         audio_url: audioUrl,
+    //         audio_url: "https://bit.ly/3yxKEIY",
+    //         // audio_url: audioUrl,
     //         disfluencies: true,
     //         sentiment_analysis: true,
     //     })
