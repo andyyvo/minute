@@ -8,6 +8,8 @@ import TabBarItem from "./src/components/TabBarItem";
 
 // FIREBASE
 // Source: https://rnfirebase.io/auth/usage
+// config file for IOS/android: https://support.google.com/firebase/answer/7015592#zippy=%2Cin-this-article
+// run `expo prebuild --clean` to create android and ios directories
 import auth from '@react-native-firebase/auth';
 import {firebase} from "./src/firebase/config";
 
