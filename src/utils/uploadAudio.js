@@ -21,9 +21,9 @@ const url = "https://api.assemblyai.com/v2/upload"; // assemblyai api endpoint
  * Returns an "upload_url" from AssemblyAI API JSON that can be processed by uploadUrl.js.
  * @param {*} audioFile - audio file recorded from mobile device supported file types: https://docs.assemblyai.com/#supported-languages
  */
-export default function uploadAudio(audioFile) {
-    // let args = process.argv.slice(2);
-    // let audioFile = args[0];
+// export default function uploadAudio(audioFile) {
+    let args = process.argv.slice(2);
+    let audioFile = args[0];
     
     // save audio file as data
     fs.readFile(audioFile, (err, data) => {
@@ -52,4 +52,4 @@ export default function uploadAudio(audioFile) {
             });
     });
     
-}
+// }

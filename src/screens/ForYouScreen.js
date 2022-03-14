@@ -6,8 +6,8 @@ import { Audio } from "expo-av";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import uploadAudio from "../utils/uploadAudio";
-import uploadUrl from "../utils/uploadUrl";
+// import uploadAudio from "../utils/uploadAudio";
+// import uploadUrl from "../utils/uploadUrl";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -80,9 +80,9 @@ export default function RecordScreen() {
     setRecordings(updatedRecordings);
 
     
-    const recordingUri = recording.getURI();
-    console.log("URI: ", recordingUri);
-    uploadAudio(soundFile);
+    // const recordingUri = recording.getURI();
+    // console.log("URI: ", recordingUri);
+    // uploadAudio(soundFile);
     // uploadUrl("https://bit.ly/3yxKEIY");
   }
 

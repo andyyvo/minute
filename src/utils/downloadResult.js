@@ -7,9 +7,10 @@ import axios from 'axios';
  * node ./src/utils/downloadResult.js
  */
 
-export default function downloadResult(audioID) {
+// export default function downloadResult(audioID) {
 
-    const audioID = "og3aszo649-a10f-4dbd-aa96-9148bbdf64d9"
+    // const audioID = "og3aszo649-a10f-4dbd-aa96-9148bbdf64d9"
+    const audioID = "ozp71x7izr-091d-461f-afd7-43d33075a9d9" // hello? this is andy...
     
     const assembly = axios.create({
         baseURL: "https://api.assemblyai.com/v2",
@@ -27,4 +28,4 @@ export default function downloadResult(audioID) {
         })
         .catch((err) => console.error(err));
 
-}
+// }
