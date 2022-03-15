@@ -16,9 +16,14 @@ const url = "https://api.assemblyai.com/v2/upload"; // assemblyai api endpoint
  * node ./src/utils/uploadAudio.js MP3-FILE
  */
 
-// export default function uploadAudio(audioFile) {
-    let args = process.argv.slice(2);
-    let audioFile = args[0];
+/**
+ * Function that takes in an audioFile recorded from the device.
+ * Returns an "upload_url" from AssemblyAI API JSON that can be processed by uploadUrl.js.
+ * @param {*} audioFile - audio file recorded from mobile device supported file types: https://docs.assemblyai.com/#supported-languages
+ */
+export default function uploadAudio(audioFile) {
+    // let args = process.argv.slice(2);
+    // let audioFile = args[0];
     
     // save audio file as data
     fs.readFile(audioFile, (err, data) => {
@@ -29,7 +34,7 @@ const url = "https://api.assemblyai.com/v2/upload"; // assemblyai api endpoint
         // Fetch API POST request
         const params = {
             headers: {
-                "authorization": process.env.ASSEMBLYAI_API_KEY,
+                authorization: process.env.ASSEMBLYAI_API_KEY,
                 "Transfer-Encoding" : "chunked"
             },
             body: data,
@@ -40,11 +45,11 @@ const url = "https://api.assemblyai.com/v2/upload"; // assemblyai api endpoint
             .then(response => response.json())
             .then(data => {
                 console.log(`URL: ${data['upload_url']}`)
-                // return data['upload_url']
+                return data['upload_url']
             })
             .catch((error) => {
                 console.error(`Error: ${error}`);
             });
     });
     
-// }
+}
