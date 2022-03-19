@@ -13,6 +13,23 @@ const app = initializeApp(firebase);
 // Get a reference to the database service
 const database = getDatabase(app);
 
+/* Firebase Anonymous sign-in
+Since this is the landing page, do this if no user is signed in
+  (Once successfully signed in, any onAuthStateChanged listeners will trigger an event with the User details.)
+*/
+  // auth()
+  // .signInAnonymously()
+  // .then(() => {
+  //   console.log('User signed in anonymously');
+  // })
+  // .catch(error => {
+  //   if (error.code === 'auth/operation-not-allowed') {
+  //     console.log('Enable anonymous in your firebase console.');
+  //   }
+
+  //   console.error(error);
+  // });
+
 export default function RecordScreen() {
   // recording: current recording
   const [recording, setRecording] = React.useState();
